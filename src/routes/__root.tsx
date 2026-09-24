@@ -12,23 +12,63 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const nav = [
+  { to: "/", label: "TRANG CHỦ" },
+  { to: "/the-gioi", label: "THẾ GIỚI" },
+  { to: "/astra", label: "HỒ SƠ ASTRA" },
+  { to: "/trung-toc", label: "TRÙNG TỘC" },
+  { to: "/luu-tru", label: "LƯU TRỮ" },
+] as const;
+
+function SiteChrome({ children }: { children: ReactNode }) {
+  return (
+    <div className="scanlines min-h-screen bg-background">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-6 py-4">
+          <Link to="/" className="font-display text-sm tracking-[0.34em] text-foreground">
+            TÂN NGUYÊN NIÊN
+          </Link>
+          <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {nav.slice(1).map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="label-mono transition-colors hover:text-ice"
+                activeProps={{ className: "label-mono text-ice" }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <span className="label-mono ml-auto hidden md:inline">AEGIS NETWORK / 3101</span>
+        </div>
+      </header>
+      <main>{children}</main>
+      <footer className="mt-24 border-t border-border">
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-4 px-6 py-8">
+          <span className="label-mono">AEGIS — HUMAN DEFENSE NETWORK</span>
+          <span className="label-mono">ARCHIVE BUILD 3101.04</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+        <p className="label-mono">SIGNAL LOST</p>
+        <h1 className="mt-4 font-display text-6xl text-foreground">404</h1>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Hồ sơ này không tồn tại hoặc đã bị niêm phong.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+        <Link
+          to="/"
+          className="label-mono corner-frame mt-8 inline-block hairline px-5 py-3 text-foreground hover:text-ice"
+        >
+          VỀ TRANG CHỦ
+        </Link>
       </div>
     </div>
   );
@@ -44,27 +84,23 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
+        <p className="label-mono text-hive">SYSTEM FAULT</p>
+        <h1 className="mt-4 font-display text-2xl text-foreground">Kết nối thất bại</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Không thể truy xuất dữ liệu từ máy chủ Aegis.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="label-mono hairline px-5 py-3 text-foreground hover:text-ice"
           >
-            Try again
+            THỬ LẠI
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
+          <a href="/" className="label-mono hairline px-5 py-3 text-foreground hover:text-ice">
+            TRANG CHỦ
           </a>
         </div>
       </div>
@@ -77,19 +113,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "TÂN NGUYÊN NIÊN — The New Era of Mankind" },
+      {
+        name: "description",
+        content:
+          "Cơ sở dữ liệu thế giới Tân Nguyên Niên: Aegis, Astra và Trùng tộc trong năm 3101.",
+      },
+      { property: "og:title", content: "TÂN NGUYÊN NIÊN" },
+      { property: "og:description", content: "Năm 3101 — kỷ nguyên của Astra và Trùng tộc." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
@@ -102,7 +143,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <head>
         <HeadContent />
       </head>
@@ -119,8 +160,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SiteChrome>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </SiteChrome>
     </QueryClientProvider>
   );
 }
