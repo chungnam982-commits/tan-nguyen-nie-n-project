@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { astras } from "@/data/astra";
+import { astras, portraits } from "@/data/astra";
 
 export const Route = createFileRoute("/astra/")({
   head: () => ({
@@ -38,6 +38,16 @@ function AstraList() {
             params={{ id: a.id }}
             className="group bg-background p-8 transition-colors hover:bg-card"
           >
+            {portraits[a.id] && (
+              <div className="mb-6 overflow-hidden border border-border">
+                <img
+                  src={portraits[a.id]}
+                  alt={`Chân dung ${a.name}`}
+                  loading="lazy"
+                  className="aspect-[3/4] w-full object-cover object-top grayscale transition duration-500 group-hover:grayscale-0"
+                />
+              </div>
+            )}
             <span className="label-mono">[ {a.index} ]</span>
             <h2 className="mt-4 font-display text-xl leading-tight text-foreground transition-colors group-hover:text-ice">
               {a.name}
