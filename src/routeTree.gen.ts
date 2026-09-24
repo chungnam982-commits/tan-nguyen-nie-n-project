@@ -10,33 +10,91 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LuuTruRouteImport } from './routes/luu-tru'
+import { Route as TheGioiRouteImport } from './routes/the-gioi'
+import { Route as TrungTocRouteImport } from './routes/trung-toc'
+import { Route as AstraIndexRouteImport } from './routes/astra.index'
+import { Route as AstraIdRouteImport } from './routes/astra.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LuuTruRoute = LuuTruRouteImport.update({
+  id: '/luu-tru',
+  path: '/luu-tru',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheGioiRoute = TheGioiRouteImport.update({
+  id: '/the-gioi',
+  path: '/the-gioi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrungTocRoute = TrungTocRouteImport.update({
+  id: '/trung-toc',
+  path: '/trung-toc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AstraIndexRoute = AstraIndexRouteImport.update({
+  id: '/astra/',
+  path: '/astra/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AstraIdRoute = AstraIdRouteImport.update({
+  id: '/astra/$id',
+  path: '/astra/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/luu-tru': typeof LuuTruRoute
+  '/the-gioi': typeof TheGioiRoute
+  '/trung-toc': typeof TrungTocRoute
+  '/astra/$id': typeof AstraIdRoute
+  '/astra/': typeof AstraIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/luu-tru': typeof LuuTruRoute
+  '/the-gioi': typeof TheGioiRoute
+  '/trung-toc': typeof TrungTocRoute
+  '/astra/$id': typeof AstraIdRoute
+  '/astra': typeof AstraIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/luu-tru': typeof LuuTruRoute
+  '/the-gioi': typeof TheGioiRoute
+  '/trung-toc': typeof TrungTocRoute
+  '/astra/$id': typeof AstraIdRoute
+  '/astra/': typeof AstraIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/luu-tru' | '/the-gioi' | '/trung-toc' | '/astra/$id' | '/astra/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/luu-tru' | '/the-gioi' | '/trung-toc' | '/astra/$id' | '/astra'
+  id:
+    | '__root__'
+    | '/'
+    | '/luu-tru'
+    | '/the-gioi'
+    | '/trung-toc'
+    | '/astra/$id'
+    | '/astra/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LuuTruRoute: typeof LuuTruRoute
+  TheGioiRoute: typeof TheGioiRoute
+  TrungTocRoute: typeof TrungTocRoute
+  AstraIdRoute: typeof AstraIdRoute
+  AstraIndexRoute: typeof AstraIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +106,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/luu-tru': {
+      id: '/luu-tru'
+      path: '/luu-tru'
+      fullPath: '/luu-tru'
+      preLoaderRoute: typeof LuuTruRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-gioi': {
+      id: '/the-gioi'
+      path: '/the-gioi'
+      fullPath: '/the-gioi'
+      preLoaderRoute: typeof TheGioiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trung-toc': {
+      id: '/trung-toc'
+      path: '/trung-toc'
+      fullPath: '/trung-toc'
+      preLoaderRoute: typeof TrungTocRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/astra/': {
+      id: '/astra/'
+      path: '/astra'
+      fullPath: '/astra/'
+      preLoaderRoute: typeof AstraIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/astra/$id': {
+      id: '/astra/$id'
+      path: '/astra/$id'
+      fullPath: '/astra/$id'
+      preLoaderRoute: typeof AstraIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LuuTruRoute: LuuTruRoute,
+  TheGioiRoute: TheGioiRoute,
+  TrungTocRoute: TrungTocRoute,
+  AstraIdRoute: AstraIdRoute,
+  AstraIndexRoute: AstraIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
