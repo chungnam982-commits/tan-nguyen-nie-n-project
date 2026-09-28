@@ -128,7 +128,7 @@ function Row({ astra }: { astra: Astra }) {
           </label>
           {defaults[astra.id] && (
             <button
-              onClick={() => setSrc(current ?? defaults[astra.id])}
+              onClick={() => setSrc(current ?? defaults[astra.id] ?? null)}
               className="label-mono hairline px-3 py-2 hover:text-ice"
             >
               CẮT LẠI

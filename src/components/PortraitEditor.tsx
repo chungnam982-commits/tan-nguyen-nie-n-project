@@ -50,7 +50,7 @@ export function PortraitEditor({ src, onCancel, onSave }: Props) {
         </div>
         <div className="mt-4 flex items-center gap-4">
           <span className="label-mono">ZOOM</span>
-          <Slider min={1} max={4} step={0.05} value={[zoom]} onValueChange={(v) => setZoom(v[0])} />
+          <Slider min={1} max={4} step={0.05} value={[zoom]} onValueChange={(v) => setZoom(v[0] ?? 1)} />
           <button
             onClick={() => {
               setCrop({ x: 0, y: 0 });
