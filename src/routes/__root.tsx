@@ -40,7 +40,7 @@ function SiteChrome({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
-          <span className="label-mono ml-auto hidden md:inline">AEGIS NETWORK / 3101</span>
+          <Link to="/admin" className="label-mono ml-auto hover:text-ice">QUẢN TRỊ</Link>
         </div>
       </header>
       <main>{children}</main>

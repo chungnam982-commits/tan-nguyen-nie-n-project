@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { astras, portraits } from "@/data/astra";
+import { astras } from "@/data/astra";
+import { usePortrait } from "@/lib/portraits";
 
 export const Route = createFileRoute("/astra/$id")({
   loader: ({ params }) => {
@@ -39,6 +40,7 @@ function Field({ label, value }: { label: string; value: string }) {
 function AstraProfile() {
   const { astra: a } = Route.useLoaderData();
   const filled = Math.round(a.stability / 10);
+  const portrait = usePortrait(a.id);
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-20">
@@ -56,10 +58,10 @@ function AstraProfile() {
 
       <div className="mt-12 grid gap-12 md:grid-cols-[260px_1fr]">
         <aside>
-          {portraits[a.id] && (
+          {portrait && (
             <div className="corner-frame hairline mb-6 overflow-hidden">
               <img
-                src={portraits[a.id]}
+                src={portrait}
                 alt={`Chân dung ${a.name}`}
                 className="aspect-[3/4] w-full object-cover object-top grayscale-[20%]"
               />
