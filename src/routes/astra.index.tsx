@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { astras, portraits } from "@/data/astra";
+import { astras } from "@/data/astra";
+import { usePortraitOverrides, resolvePortrait } from "@/lib/portraits";
 
 export const Route = createFileRoute("/astra/")({
   head: () => ({
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/astra/")({
 });
 
 function AstraList() {
+  const { data: overrides } = usePortraitOverrides();
   return (
     <div className="mx-auto max-w-5xl px-6 py-20">
       <p className="label-mono">FILE 02 / PERSONNEL</p>
@@ -38,10 +40,10 @@ function AstraList() {
             params={{ id: a.id }}
             className="group bg-background p-8 transition-colors hover:bg-card"
           >
-            {portraits[a.id] && (
+            {resolvePortrait(a.id, overrides) && (
               <div className="mb-6 overflow-hidden border border-border">
                 <img
-                  src={portraits[a.id]}
+                  src={resolvePortrait(a.id, overrides)!}
                   alt={`Chân dung ${a.name}`}
                   loading="lazy"
                   className="aspect-[3/4] w-full object-cover object-top grayscale transition duration-500 group-hover:grayscale-0"
