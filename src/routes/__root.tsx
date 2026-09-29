@@ -40,7 +40,7 @@ function SiteChrome({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
-          <Link to="/admin" className="label-mono ml-auto hover:text-ice">QUẢN TRỊ</Link>
+          <Link to="/admin" className="label-mono ml-auto hover:text-ice">TRUY CẬP</Link>
         </div>
       </header>
       <main>{children}</main>
