@@ -30,7 +30,7 @@ export function PortraitBackup() {
         if (row.removed) {
           entries.push({ astra_id: row.astra_id, state: "removed" });
         } else if (row.image_url?.startsWith("data:")) {
-          const [head, b64] = row.image_url.split(",");
+          const [head = "", b64 = ""] = row.image_url.split(",");
           const file = `images/${row.astra_id}.${extFromMime(head)}`;
           zip.file(file, b64, { base64: true });
           entries.push({ astra_id: row.astra_id, state: "custom", file });
