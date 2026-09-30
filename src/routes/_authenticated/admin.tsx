@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { astras, portraits as defaults, type Astra } from "@/data/astra";
 import { portraitsQueryKey, resolvePortrait, usePortraitOverrides } from "@/lib/portraits";
 import { PortraitEditor } from "@/components/PortraitEditor";
+import { PortraitBackup } from "@/components/PortraitBackup";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -59,11 +60,14 @@ function AdminPage() {
         </p>
       )}
       {admin.data && (
-        <div className="mt-12 space-y-px border border-border bg-border">
-          {astras.map((a) => (
-            <Row key={a.id} astra={a} />
-          ))}
-        </div>
+        <>
+          <PortraitBackup />
+          <div className="mt-12 space-y-px border border-border bg-border">
+            {astras.map((a) => (
+              <Row key={a.id} astra={a} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
