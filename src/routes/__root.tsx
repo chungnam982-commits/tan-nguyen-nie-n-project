@@ -26,8 +26,9 @@ function SiteChrome({ children }: { children: ReactNode }) {
     <div className="scanlines min-h-screen bg-background">
       <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-6 py-4">
-          <Link to="/" className="font-display text-sm tracking-[0.34em] text-foreground">
-            TÂN NGUYÊN NIÊN
+          <Link to="/" className="flex items-center gap-3 font-display text-sm tracking-[0.34em] text-foreground">
+            <img src="/favicon.png" alt="" width={36} height={36} className="h-9 w-9 shrink-0" />
+            <span>TÂN NGUYÊN NIÊN</span>
           </Link>
           <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {nav.slice(1).map((item) => (
@@ -133,7 +134,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,

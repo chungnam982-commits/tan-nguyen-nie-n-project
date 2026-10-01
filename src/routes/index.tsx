@@ -14,6 +14,10 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Năm 3101. Astra, Trùng tộc và Aegis — nơi câu chuyện của những người sống sót bắt đầu.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://lunar-chronicle-design.lovable.app/share-cover.jpg" },
+      { name: "twitter:image", content: "https://lunar-chronicle-design.lovable.app/share-cover.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -95,6 +99,9 @@ function Index() {
           ))}
         </div>
       </section>
+      <div className="mx-auto max-w-6xl px-6">
+        <img src="/share-cover.jpg" alt="Tân Nguyên Niên — Aegis Archive 3101" width={1200} height={630} loading="lazy" className="h-auto w-full border border-border" />
+      </div>
     </div>
   );
 }
