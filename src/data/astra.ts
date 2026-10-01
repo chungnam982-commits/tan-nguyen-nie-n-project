@@ -118,12 +118,12 @@ export const astras: Astra[] = [
 
 export const unitOf = (a: Astra) => `AEGIS — ${a.unit}`;
 
-import kael from "@/assets/kael.png.asset.json";
-import seraphine from "@/assets/seraphine.png.asset.json";
-import eira from "@/assets/eira.png.asset.json";
+import kael from "@/assets/kael.png";
+import seraphine from "@/assets/seraphine.png";
+import eira from "@/assets/eira.png";
 
 export const portraits: Record<string, string> = {
-  "kael-veyron": kael.url,
-  "seraphine-aster": seraphine.url,
-  "eira-noctis": eira.url,
+  "kael-veyron": kael,
+  "seraphine-aster": seraphine,
+  "eira-noctis": eira,
 };
