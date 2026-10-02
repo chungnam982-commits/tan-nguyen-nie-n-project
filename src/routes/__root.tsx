@@ -22,15 +22,30 @@ const nav = [
 ] as const;
 
 function SiteChrome({ children }: { children: ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   return (
     <div className="scanlines min-h-screen bg-background">
       <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-6 py-4">
-          <Link to="/" className="flex items-center gap-3 font-display text-sm tracking-[0.34em] text-foreground">
-            <img src="/favicon.png" alt="" width={36} height={36} className="h-9 w-9 shrink-0" />
-            <span>TÂN NGUYÊN NIÊN</span>
+        <div className="mx-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:flex sm:justify-between sm:px-6 sm:py-4">
+          <Link
+            to="/"
+            className="flex min-w-0 items-center gap-2.5 font-display text-xs tracking-[0.24em] text-foreground sm:gap-3 sm:text-sm sm:tracking-[0.34em]"
+          >
+            <img
+              src="/favicon.png"
+              alt=""
+              width={36}
+              height={36}
+              className="h-7 w-7 shrink-0 sm:h-9 sm:w-9"
+            />
+            <span className="truncate">TÂN NGUYÊN NIÊN</span>
           </Link>
-          <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <nav className="hidden items-center gap-x-6 md:flex">
             {nav.slice(1).map((item) => (
               <Link
                 key={item.to}
@@ -42,8 +57,48 @@ function SiteChrome({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
-          <Link to="/admin" className="label-mono ml-auto hover:text-ice">TRUY CẬP</Link>
+          <div className="flex shrink-0 items-center gap-3">
+            <Link to="/admin" className="label-mono hidden hover:text-ice md:inline">
+              TRUY CẬP
+            </Link>
+            <button
+              type="button"
+              aria-label={menuOpen ? "Đóng menu" : "Mở menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+              className="hairline flex h-9 w-9 flex-col items-center justify-center gap-[5px] md:hidden"
+            >
+              <span className="block h-px w-4 bg-foreground" />
+              <span className="block h-px w-4 bg-foreground" />
+              <span className="block h-px w-4 bg-foreground" />
+            </button>
+          </div>
         </div>
+        {menuOpen && (
+          <nav className="border-t border-border bg-background px-4 py-2 md:hidden">
+            <ul className="flex flex-col">
+              {nav.map((item) => (
+                <li key={item.to} className="border-b border-border/60 last:border-b-0">
+                  <Link
+                    to={item.to}
+                    className="label-mono block py-3.5 text-foreground transition-colors hover:text-ice"
+                    activeProps={{ className: "label-mono block py-3.5 text-ice" }}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="mt-1">
+                <Link
+                  to="/admin"
+                  className="label-mono block py-3.5 transition-colors hover:text-ice"
+                >
+                  TRUY CẬP
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        )}
       </header>
       <main>{children}</main>
       <footer className="mt-24 border-t border-border">
