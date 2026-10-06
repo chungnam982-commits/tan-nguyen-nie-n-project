@@ -32,16 +32,16 @@ function AuthPage() {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setBusy(false);
       if (error) return setMsg(error.message);
-      navigate({ to: "/admin" });
+      navigate({ to: "/ho-so" });
     } else {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: { emailRedirectTo: `${window.location.origin}/admin` },
+        options: { emailRedirectTo: `${window.location.origin}/ho-so` },
       });
       setBusy(false);
       if (error) return setMsg(error.message);
-      if (data.session) navigate({ to: "/admin" });
+      if (data.session) navigate({ to: "/ho-so" });
       else setMsg("Kiểm tra email để xác nhận tài khoản, sau đó đăng nhập.");
     }
   }
@@ -50,7 +50,7 @@ function AuthPage() {
     const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
     if (r.error) return setMsg(String(r.error.message ?? r.error));
     if (r.redirected) return;
-    navigate({ to: "/admin" });
+    navigate({ to: "/ho-so" });
   }
 
   return (

@@ -59,7 +59,7 @@ function SiteChrome({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="flex shrink-0 items-center gap-3">
-            <Link to="/admin" className="label-mono hidden hover:text-ice md:inline">
+            <Link to="/ho-so" className="label-mono hidden hover:text-ice md:inline">
               TRUY CẬP
             </Link>
             <button
@@ -91,7 +91,7 @@ function SiteChrome({ children }: { children: ReactNode }) {
               ))}
               <li className="mt-1">
                 <Link
-                  to="/admin"
+                  to="/ho-so"
                   className="label-mono block py-3.5 transition-colors hover:text-ice"
                 >
                   TRUY CẬP

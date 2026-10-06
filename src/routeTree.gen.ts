@@ -16,6 +16,7 @@ import { Route as LuuTruRouteImport } from './routes/luu-tru'
 import { Route as TheGioiRouteImport } from './routes/the-gioi'
 import { Route as TrungTocRouteImport } from './routes/trung-toc'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedHoSoRouteImport } from './routes/_authenticated/ho-so'
 import { Route as AstraIndexRouteImport } from './routes/astra.index'
 import { Route as AstraIdRouteImport } from './routes/astra.$id'
 
@@ -53,6 +54,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedHoSoRoute = AuthenticatedHoSoRouteImport.update({
+  id: '/ho-so',
+  path: '/ho-so',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AstraIndexRoute = AstraIndexRouteImport.update({
   id: '/astra/',
   path: '/astra/',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/the-gioi': typeof TheGioiRoute
   '/trung-toc': typeof TrungTocRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/ho-so': typeof AuthenticatedHoSoRoute
   '/astra/$id': typeof AstraIdRoute
   '/astra/': typeof AstraIndexRoute
 }
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/the-gioi': typeof TheGioiRoute
   '/trung-toc': typeof TrungTocRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/ho-so': typeof AuthenticatedHoSoRoute
   '/astra/$id': typeof AstraIdRoute
   '/astra': typeof AstraIndexRoute
 }
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/the-gioi': typeof TheGioiRoute
   '/trung-toc': typeof TrungTocRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/ho-so': typeof AuthenticatedHoSoRoute
   '/astra/$id': typeof AstraIdRoute
   '/astra/': typeof AstraIndexRoute
 }
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/the-gioi'
     | '/trung-toc'
     | '/admin'
+    | '/ho-so'
     | '/astra/$id'
     | '/astra/'
   fileRoutesByTo: FileRoutesByTo
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/the-gioi'
     | '/trung-toc'
     | '/admin'
+    | '/ho-so'
     | '/astra/$id'
     | '/astra'
   id:
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/the-gioi'
     | '/trung-toc'
     | '/_authenticated/admin'
+    | '/_authenticated/ho-so'
     | '/astra/$id'
     | '/astra/'
   fileRoutesById: FileRoutesById
@@ -192,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/ho-so': {
+      id: '/_authenticated/ho-so'
+      path: '/ho-so'
+      fullPath: '/ho-so'
+      preLoaderRoute: typeof AuthenticatedHoSoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/astra/': {
       id: '/astra/'
       path: '/astra'
@@ -211,10 +230,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedHoSoRoute: typeof AuthenticatedHoSoRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedHoSoRoute: AuthenticatedHoSoRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
