@@ -35,6 +35,27 @@ export type Database = {
         }
         Relationships: []
       }
+      player_profiles: {
+        Row: {
+          bio: string | null
+          display_name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          display_name?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          display_name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
