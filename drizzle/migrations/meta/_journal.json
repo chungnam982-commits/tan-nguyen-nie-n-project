@@ -8,6 +8,13 @@
       "when": 1791297379285,
       "tag": "0000_player_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791297738121,
+      "tag": "0001_lock_admin_to_chungnam",
+      "breakpoints": true
     }
   ]
 }
