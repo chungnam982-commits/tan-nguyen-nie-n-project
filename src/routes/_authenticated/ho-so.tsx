@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import lucien from "@/assets/lucien.jpg.asset.json";
+import lucien from "@/assets/lucien.jpg";
 
 export const Route = createFileRoute("/_authenticated/ho-so")({
   head: () => ({
@@ -167,7 +167,7 @@ function PlayerProfile() {
         <aside>
           <div className="corner-frame hairline mb-6 overflow-hidden">
             <img
-              src={lucien.url}
+              src={lucien}
               alt={`Chân dung ${displayName}`}
               className="aspect-[3/4] w-full object-cover object-top"
             />
